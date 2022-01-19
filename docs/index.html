@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>&#9881;LoRa Node Configuration</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css"
+        integrity="sha384-Bfad6CLCknfcloXFOyFnlgtENryhrpZCe29RTifKEixXQZ38WheV+i/6YWSzkz3V" crossorigin="anonymous" />
+    <link rel="shortcut icon" type="image/x-icon"
+        href="https://raw.githubusercontent.com/mitwelten/mitwelten.github.io/master/favicon.ico">
+</head>
+
+<body onload="toggleLoRaAct();">
+
+    <div>
+        <nav class="navbar navbar-inverse navbar-expand-lg navbar-static-top" style="background-color: #333333;">
+            <div class="container">
+                <a class="navbar-brand">LoRa Node Configuration</a>
+            </div>
+        </nav>
+    </div>
+
+    <div class="container">
+        <h2 class="mt-4 mb-3">Edit Configuration<br><small class="text-muted"></small></h2>
+        <form method="post">
+            <input type="hidden">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card mb-4">
+                        <div class="card-header"><strong>Connectivity</strong></div>
+                        <div class="card-body">
+
+
+                            <div class="form-group row">
+                                <label class="col-12 col-form-label"><strong>Spreading Factor</strong></label>
+                                <div class="col-12">
+                                    <select class="form-select" id="lorasf">
+                                        <option value="7">SF 7</option>
+                                        <option selected value="8">SF 8</option>
+
+                                        <option value="9">SF 9</option>
+                                        <option value="10">SF 10</option>
+                                        <option value="11">SF 11</option>
+                                        <option value="12">SF 12</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-12 col-form-label"><strong>Adaptive Data Rate</strong></label>
+                                <div class="col-12">
+                                    <div class="input-group">
+                                        <div class="col-md-6">
+                                            <input class="form-check-input" type="checkbox" value="" id="use_adr"
+                                                checked>
+                                            <label class="form-check-label" for="flexCheckDefault">Use ADR</label>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div><br>
+
+                            <!-- Select Activation Method-->
+                            <div class="form-group row">
+                                <label class="col-12 col-form-label"><strong>Activation Method</strong></label>
+                                <div class="col-12">
+                                    <select class="form-select" id="activation" onchange="toggleLoRaAct();">
+                                        <option selected value="abp">ABP</option>
+                                        <option value="otaa">OTAA</option>
+                                    </select>
+                                </div>
+                            </div><br>
+                            <p>Paste TTN Credentials in MSB Format</p>
+
+                            <p><strong>ABP</strong></p>
+                            <div class="form-group row">
+                                <label class="col-12 col-form-label">Device
+                                    address</label>
+                                <div class="col-12">
+                                    <input id="deviceaddress" name="deviceaddress" type="text" maxlength="100"
+                                        placeholder="01234567" value="" class="form-control input-md text-monospace"
+                                        required>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-12 col-form-label">NwkSKey</label>
+                                <div class="col-12">
+                                    <div class="input-group">
+                                        <input id="nwkskey" name="nwkskey" type="text" maxlength="100"
+                                            placeholder="0123456789ABCDEF0123456789ABCDEF" value=""
+                                            class="form-control input-md text-monospace" required>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-12 col-form-label" for="appskey">AppSKey</label>
+                                <div class="col-12">
+                                    <div class="input-group">
+                                        <input id="appskey" name="appskey" type="text" maxlength="100"
+                                            placeholder="0123456789ABCDEF0123456789ABCDEF" value=""
+                                            class="form-control input-md text-monospace" required>
+
+                                    </div>
+                                </div>
+                            </div><br>
+
+                            <p><strong>OTAA</strong></p>
+                            <div class="form-group row">
+                                <label class="col-12 col-form-label">AppEUI</label>
+                                <div class="col-12">
+                                    <div class="input-group">
+                                        <input id="appeui" name="appeui" type="text" maxlength="100"
+                                            placeholder="0123456789ABCDEF" value=""
+                                            class="form-control input-md text-monospace" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-12 col-form-label">DevEUI</label>
+                                <div class="col-12">
+                                    <div class="input-group">
+                                        <input id="deveui" name="deveui" type="text" maxlength="100"
+                                            placeholder="0123456789ABCDEF" value=""
+                                            class="form-control input-md text-monospace" required>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-12 col-form-label">AppKey</label>
+                                <div class="col-12">
+                                    <div class="input-group">
+                                        <input id="appkey" name="appkey" type="text" maxlength="100"
+                                            placeholder="0123456789ABCDEF0123456789ABCDEF" value=""
+                                            class="form-control input-md text-monospace" required>
+                                    </div>
+                                </div>
+                            </div><br>
+
+
+
+                            <div class="form-group row">
+                                <label class="col-12 col-form-label"><strong>Transmit Interval (s)</strong></label>
+                                <div class="col-12">
+                                    <div class="input-group">
+                                        <input id="txinterval" name="txinterval" type="text" maxlength="100"
+                                            placeholder="" value="900" class="form-control input-md text-monospace"
+                                            required>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-12">
+                    <div class="card mb-4">
+                        <div class="card-header"><strong>Sensors</strong>
+                        </div>
+                        <div class="card-body">
+
+
+                            <label class="col-12 col-form-label">Air Temperature & Humidity</label>
+                            <div class="form-group row">
+                                <div class="col-md-3">
+                                    <input class="form-check-input" type="checkbox" value="" id="has_sht31"
+                                        onchange="document.getElementById('sht31_i2c_addr').disabled = !document.getElementById('has_sht31').checked;">
+                                    <label class="form-check-label">SHT31 Temp and Humi Sensor</label>
+                                </div>
+                                <div class="col-md-3">
+                                    <a href="https://wiki.dfrobot.com/SHT31_Temperature_Humidity_Sensor_Weatherproof_SKU_SEN0385"
+                                        target="_blank">DFRobot Wiki</a><br>
+                                    <a href="https://wiki.seeedstudio.com/Grove-TempAndHumi_Sensor-SHT31/"
+                                        target="_blank">Grove Wiki</a>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="input-group md-6">
+                                        <span class="input-group-text">I2C Address</span>
+                                        <input id="sht31_i2c_addr" type="text" class="form-control" value="0x44"
+                                            disabled>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+                            <label class="col-12 col-form-label" for="appskey">Soil Moisture</label>
+                            <div class="form-group row">
+                                <div class="col-md-3">
+                                    <input class="form-check-input" type="checkbox" value="" id="has_moisture_sensor"
+                                        onchange="document.getElementById('cap_moist_pin').disabled = !document.getElementById('has_moisture_sensor').checked;">
+                                    <label class="form-check-label">Capacitive Soil Moisture
+                                        Sensor</label>
+                                </div>
+                                <div class="col-md-3">
+                                    <a href="https://wiki.dfrobot.com/Waterproof_Capacitive_Soil_Moisture_Sensor_SKU_SEN0308"
+                                        target="_blank">DFRobot Wiki</a><br>
+                                    <a href="https://wiki.seeedstudio.com/Grove-Capacitive_Moisture_Sensor-Corrosion-Resistant/"
+                                        target="_blank">Grove Wiki</a>
+                                </div>
+                                <div class="col-md-6 ">
+                                    <div class="input-group md-6">
+                                        <span class="input-group-text">Analog Pin</span>
+                                        <input type="text" id="cap_moist_pin" class="form-control" value="A0" disabled>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <label class="col-12 col-form-label" for="appskey">Soil Temperature</label>
+                            <div class="form-group row">
+                                <div class="col-md-3">
+                                    <input class="form-check-input" type="checkbox" value="" id="has_ds18b20"
+                                        onchange="document.getElementById('ds18b20_pin').disabled = !document.getElementById('has_ds18b20').checked;">
+
+                                    <label class="form-check-label">DS18B20 Temperature Sensor</label>
+                                </div>
+                                <div class="col-md-3">
+                                    <a href="https://wiki.seeedstudio.com/One-Wire-Temperature-Sensor-DS18B20/"
+                                        target="_blank">Grove Wiki</a>
+                                </div>
+                                <div class="col-md-6 ">
+                                    <div class="input-group md-6">
+                                        <span class="input-group-text">Analog/Digital Pin</span>
+                                        <input type="text" id="ds18b20_pin" class="form-control" value="A2" disabled>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <label class="col-12 col-form-label" for="appskey">Multichannel Gas Sensor</label>
+                            <div class="form-group row">
+                                <div class="col-md-3">
+                                    <input class="form-check-input" type="checkbox" value="" id="has_mc_gas_sensor"
+                                        onchange="document.getElementById('mc_gas_i2c_addr').disabled = !document.getElementById('has_mc_gas_sensor').checked;">
+
+                                    <label class="form-check-label">Gas Sensor V2(Multichannel)</label>
+                                </div>
+                                <div class="col-md-3">
+                                    <a href="https://wiki.seeedstudio.com/Grove-Multichannel-Gas-Sensor-V2/"
+                                        target="_blank">Grove Wiki</a>
+                                </div>
+                                <div class="col-md-6 ">
+                                    <div class="input-group md-6">
+                                        <span class="input-group-text">I2C Address</span>
+                                        <input type="text" id="mc_gas_i2c_addr" class="form-control" value="0x08"
+                                            disabled>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <label class="col-12 col-form-label" for="appskey">UV Index</label>
+                            <div class="form-group row">
+                                <div class="col-md-3">
+                                    <input class="form-check-input" type="checkbox" value="" id="has_uv_sensor"
+                                        onchange="document.getElementById('uv_sensor_pin').disabled = !document.getElementById('has_uv_sensor').checked;">
+
+                                    <label class="form-check-label">UV Sensor</label>
+                                </div>
+                                <div class="col-md-3">
+                                    <a href="https://wiki.seeedstudio.com/Grove-UV_Sensor/" target="_blank">Grove
+                                        Wiki</a>
+                                </div>
+                                <div class="col-md-6 ">
+                                    <div class="input-group md-6">
+                                        <span class="input-group-text">Analog Pin</span>
+                                        <input type="text" id="uv_sensor_pin" class="form-control" value="A4" disabled>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <label class="col-12 col-form-label" for="appskey">Water Turbidity</label>
+                            <div class="form-group row">
+                                <div class="col-md-3">
+                                    <input class="form-check-input" type="checkbox" value="" id="has_turbidity_sensor"
+                                        onchange="document.getElementById('turbidity_sensor_pin').disabled = !document.getElementById('has_turbidity_sensor').checked;">
+
+                                    <label class="form-check-label">Turbidity Sensor Meter v1.0</label>
+                                </div>
+                                <div class="col-md-3">
+                                    <a href="https://wiki.seeedstudio.com/Grove-Turbidity-Sensor-Meter-for-Arduino-V1.0/"
+                                        target="_blank">Grove Wiki</a>
+                                </div>
+                                <div class="col-md-6 ">
+                                    <div class="input-group md-6">
+                                        <span class="input-group-text">Analog Pin</span>
+                                        <input type="text" id="turbidity_sensor_pin" class="form-control" value="A0"
+                                            disabled>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <label class="col-12 col-form-label" for="appskey">Sound Sensor</label>
+                            <div class="form-group row">
+                                <div class="col-md-3">
+                                    <input class="form-check-input" type="checkbox" value="" id="has_sound_sensor"
+                                        onchange="document.getElementById('sound_sensor_pin').disabled = !document.getElementById('has_sound_sensor').checked;">
+
+                                    <label class="form-check-label">Sound Sensor</label>
+                                </div>
+                                <div class="col-md-3">
+                                    <a href="https://wiki.seeedstudio.com/Grove-Sound_Sensor/" target="_blank">Grove
+                                        Wiki</a>
+                                </div>
+                                <div class="col-md-6 ">
+                                    <div class="input-group md-6">
+                                        <span class="input-group-text">Analog Pin</span>
+                                        <input type="text" id="sound_sensor_pin" class="form-control" value="A2"
+                                            disabled>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <label class="col-12 col-form-label" for="appskey">Distance</label>
+                            <div class="form-group row">
+                                <div class="col-md-3">
+                                    <input class="form-check-input" type="checkbox" value="" id="has_distance_sensor">
+                                    <label class="form-check-label">A02YYUW Ultrasonic Distance Sensor</label>
+                                </div>
+                                <div class="col-md-3">
+                                    <a href="https://wiki.dfrobot.com/_A02YYUW_Waterproof_Ultrasonic_Sensor_SKU_SEN0311"
+                                        target="_blank">DFRobot Wiki</a>
+                                </div>
+                                <div class="col-md-6 ">
+                                    <div class="input-group md-6">
+                                        <span class="input-group-text">Serial Port</span>
+                                        <input type="text" id="sound_sensor_pin" class="form-control" value="Serial1"
+                                            disabled>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        <div class="row">
+            <div class="col text-center">
+
+                <button class="btn  btn-primary" type="button" onclick="generateConfig()"><i class="fa fa-file"></i>
+                    Generate</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col text-center">
+
+                <p>Click to generate the config file</p>
+            </div>
+        </div>
+
+        <div class="row">
+
+            <div class="col-md-12">
+                <div class="card mb-4">
+                    <div class="card-header"><strong>Config File</strong>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group row">
+                            <div class="col-10">
+                                <textarea class="form-control text-monospace" name="aclPublish" id="configOutput"
+                                    maxlength="2000" rows="10"
+                                    style="margin-top: 0px; margin-bottom: 0px; height: 200px;"
+                                    disabled>click Generate</textarea>
+                            </div>
+
+                            <div class="col-2">
+                                <button class="btn  btn-primary" id="downloadbutton" type="button" onclick="download()"
+                                    disabled><i class="fa fa-download"></i>
+                                    download</button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <script>
+
+        function toggleLoRaAct() {
+            let actopt = document.getElementById("activation").selectedIndex;
+            console.log(actopt);
+
+            if (actopt == 0) {
+                document.getElementById('deviceaddress').disabled = false;
+                document.getElementById('appskey').disabled = false;
+                document.getElementById('nwkskey').disabled = false;
+                document.getElementById('appeui').disabled = true;
+                document.getElementById('deveui').disabled = true;
+                document.getElementById('appkey').disabled = true;
+            } else {
+                document.getElementById('deviceaddress').disabled = true;
+                document.getElementById('appskey').disabled = true;
+                document.getElementById('nwkskey').disabled = true;
+                document.getElementById('appeui').disabled = false;
+                document.getElementById('deveui').disabled = false;
+                document.getElementById('appkey').disabled = false;
+
+            }
+        }
+
+        function validateHexInput(hexnr, length) {
+            if (length == 8) {
+                return hexnr.match(/^[a-f0-9]{8}$/i) !== null;
+            }
+            else if (length == 16) {
+                return hexnr.match(/^[a-f0-9]{16}$/i) !== null;
+            } else if (length == 32) {
+                return hexnr.match(/^[a-f0-9]{32}$/i) !== null;
+            }
+            else return false;
+        }
+        function generateConfig() {
+            var valid = true;
+            var used_pins = [];
+            let actopt = document.getElementById("activation").selectedIndex;
+            let appskey = document.getElementById("appskey").value;
+            let nwkskey = document.getElementById("nwkskey").value;
+            let deviceaddr = document.getElementById("deviceaddress").value;
+
+            let appeui = document.getElementById("appeui").value;
+            let deveui = document.getElementById("deveui").value;
+            let appkey = document.getElementById("appkey").value;
+
+
+            let lora_sf = document.getElementById("lorasf").value;
+            let use_adr = document.getElementById("use_adr").checked;
+            let tx_interval = document.getElementById("txinterval").value;
+
+            let has_sht = document.getElementById("has_sht31").checked;
+            let sht_addr = document.getElementById("sht31_i2c_addr").value;
+
+            let has_moisture_sensor = document.getElementById("has_moisture_sensor").checked;
+            let cap_moist_pin = document.getElementById("cap_moist_pin").value;
+
+            let has_ds18b20 = document.getElementById("has_ds18b20").checked;
+            let ds18b20_pin = document.getElementById("ds18b20_pin").value;
+
+            let has_mc_gas_sensor = document.getElementById("has_mc_gas_sensor").checked;
+            let mc_gas_i2c_addr = document.getElementById("mc_gas_i2c_addr").value;
+
+            let has_uv_sensor = document.getElementById("has_uv_sensor").checked;
+            let uv_sensor_pin = document.getElementById("uv_sensor_pin").value;
+
+            let has_turbidity_sensor = document.getElementById("has_turbidity_sensor").checked;
+            let turbidity_sensor_pin = document.getElementById("turbidity_sensor_pin").value;
+
+            let has_sound_sensor = document.getElementById("has_sound_sensor").checked;
+            let sound_sensor_pin = document.getElementById("sound_sensor_pin").value;
+
+            let has_distance_sensor = document.getElementById("has_distance_sensor").checked;
+
+            if (actopt == 0) {
+                if (!validateHexInput(deviceaddr, 8)) {
+                    alert("Device address not valid!");
+                    valid = false;
+                    return NaN;
+                }
+                if (!validateHexInput(nwkskey, 32)) {
+                    alert("NwkSKey not valid!");
+                    valid = false;
+                    return NaN;
+
+                }
+                if (!validateHexInput(appskey, 32)) {
+                    alert("AppSKey not valid!");
+                    valid = false;
+                    return NaN;
+                }
+            } else {
+                if (!validateHexInput(appeui, 16)) {
+                    alert("AppEUI  not valid!");
+                    valid = false;
+                    return NaN;
+                }
+                if (!validateHexInput(deveui, 16)) {
+                    alert("DevEUI not valid!");
+                    valid = false;
+                    return NaN;
+
+                }
+                if (!validateHexInput(appkey, 32)) {
+                    alert("AppKey not valid!");
+                    valid = false;
+                    return NaN;
+                }
+            }
+
+
+            let text = "# LoRa Node Configuration\n# Created at "
+            const d = new Date();
+            text += d;
+            text += "\n\n"
+            text += "# Connectivity"
+            text += "\nactivation = "
+            if (actopt == 0) {
+                text += "abp"
+                text += "\ndevice_address="
+                text += deviceaddr;
+                text += "\nnwkskey="
+                text += nwkskey;
+                text += "\nappskey="
+                text += appskey;
+            } else {
+                text += "otaa"
+                text += "\nappeui="
+                text += appeui;
+                text += "\ndeveui="
+                text += deveui;
+                text += "\nappkey="
+                text += appkey;
+            }
+            text += "\nlora_sf="
+            text += lora_sf;
+
+            text += "\nuse_adr="
+            text += use_adr;
+
+            text += "\ntx_interval="
+            text += tx_interval;
+
+            text += "\n\n# Sensors"
+
+            if (has_sht) {
+                text += "\nhas_sht31=true"
+                text += "\nsht31_i2c_addr="
+                text += sht_addr
+            }
+            if (has_moisture_sensor) {
+                text += "\nhas_moisture_sensor=true"
+                text += "\ncap_moist_pin="
+                text += cap_moist_pin;
+                used_pins.push(cap_moist_pin);
+            }
+            if (has_ds18b20) {
+                text += "\nhas_ds18b20=true";
+                text += "\nds18b20_pin="
+                text += ds18b20_pin
+                used_pins.push(ds18b20_pin);
+
+            }
+            if (has_mc_gas_sensor) {
+                text += "\nhas_mc_gas_sensor=true";
+                text += "\nmc_gas_i2c_addr="
+                text += mc_gas_i2c_addr
+            }
+
+            if (has_uv_sensor) {
+                text += "\nhas_uv_sensor=true";
+                text += "\nuv_sensor_pin="
+                text += uv_sensor_pin
+                used_pins.push(uv_sensor_pin);
+
+            }
+
+            if (has_turbidity_sensor) {
+                text += "\nhas_turbidity_sensor=true";
+                text += "\nturbidity_sensor_pin="
+                text += turbidity_sensor_pin
+                used_pins.push(turbidity_sensor_pin);
+
+            }
+            if (has_sound_sensor) {
+                text += "\nhas_sound_sensor=true";
+                text += "\nsound_sensor_pin="
+                text += sound_sensor_pin
+                used_pins.push(sound_sensor_pin);
+
+            }
+            if (has_distance_sensor) {
+                text += "\nhas_distance_sensor=true";
+                text += "\n# Uses Serial1"
+
+            }
+
+            let findDuplicates = arr => arr.filter((item, index) => arr.indexOf(item) != index)
+            let duplicates = findDuplicates(used_pins);
+            if (duplicates.length > 0) {
+                var alertmsg = "Pin ";
+                alertmsg += duplicates[0];
+                alertmsg += " defined multiple times."
+                alert(alertmsg)
+                valid = false;
+            }
+
+            if (valid) {
+                document.getElementById('configOutput').setAttribute("disabled", "disabled");
+                document.getElementById("configOutput").innerHTML = text;
+                document.getElementById("downloadbutton").removeAttribute("disabled");
+            }
+
+        }
+
+        function download() {
+            var element = document.createElement('a');
+            let text = document.getElementById("configOutput").value;
+            element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+            element.setAttribute('download', "configuration.conf");
+
+            element.style.display = 'none';
+            document.body.appendChild(element);
+
+            element.click();
+
+            document.body.removeChild(element);
+
+        }
+    </script>
+</body>
+
+</html>
