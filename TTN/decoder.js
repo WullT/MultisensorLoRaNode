@@ -1,6 +1,6 @@
 // https://fhnw.mit-license.org/
 
-let node_id = "testing-envnode-otaa"; // set the node_id
+let node_id = "testing-envnode-otaa"; // set the node_id here
 
 function bytes2float(hb, lb) {
     return ((hb << 8) + lb) / 100;
