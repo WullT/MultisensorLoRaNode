@@ -12,6 +12,8 @@ LoRa Module: `RFM95W` LoRa Module e.g. [Radio FeatherWing](https://www.adafruit.
 
 To enter the config_mode: A button that connects GPIO `D4` to `GND` if pressed (or simply a jumper wire)
 
+GPIO `12` is set to `HIGH` 2000 ms before the measurement starts and is set to `LOW` after the measurement. It can be used to turn on and off sensors. If power consumption of the sensors is more than 10 mA, you should use a transistor to switch the load.
+
 Supported Sensors | Link
 --|--
 SHT31 Air Temperature and Humidity Sensor | [Grove](https://wiki.seeedstudio.com/Grove-TempAndHumi_Sensor-SHT31/), [DFRobot (Weatherproof)](https://wiki.dfrobot.com/SHT31_Temperature_Humidity_Sensor_Weatherproof_SKU_SEN0385)
