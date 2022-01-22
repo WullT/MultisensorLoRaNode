@@ -35,7 +35,7 @@ function Decoder(bytes, port) {
         while (i < bytes.length) {
             switch (bytes[i]) {
                 case sensors.airth:
-                    decoded.airemp = bytes2float(bytes[i + 1], bytes[i + 2]);
+                    decoded.airtemperature = bytes2float(bytes[i + 1], bytes[i + 2]);
                     decoded.airhumidity = bytes2float(bytes[i + 3], bytes[i + 4]);
                     i += 5
                     break;
