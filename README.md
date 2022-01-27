@@ -25,6 +25,10 @@ Analog Turbidity Sensor | [Grove](https://wiki.seeedstudio.com/Grove-Turbidity-S
 Sound Sensor | [Grove](https://wiki.seeedstudio.com/Grove-Sound_Sensor/)
 Ultrasonic Distance Sensor | [DFRobot](https://wiki.dfrobot.com/_A02YYUW_Waterproof_Ultrasonic_Sensor_SKU_SEN0311)
 
+### Wiring
+
+![schematics](images/MultiSensorLoRaNode.png)
+
 ## Setup Without IDE (UF2 Bootloader)
 
 - Connect the board to your PC
