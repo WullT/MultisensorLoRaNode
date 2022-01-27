@@ -39,9 +39,9 @@ uint16_t measureAnalogLevel(uint8_t analogPin);
 
 uint16_t getGas(uint8_t gasNr);
 
-uint16_t getSHTTemp();
+int16_t getSHTTemp();
 uint16_t getSHTHumi();
 
-uint16_t getDs18b21Temp();
+int16_t getDs18b21Temp();
 
 int getUVIndex(uint8_t analogPin);

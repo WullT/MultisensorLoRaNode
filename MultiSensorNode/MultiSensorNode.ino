@@ -78,10 +78,10 @@ static osjob_t sendjob;
 
 Adafruit_NeoPixel neoPixel = Adafruit_NeoPixel(1, NEOPIXEL_PIN, NEO_GRB + NEO_KHZ800);
 
-uint16_t shttemp = 0;
+int16_t shttemp = 0;
 uint16_t shthumi = 0;
 uint16_t moisture = 0;
-uint16_t ds18b21temp = 0;
+int16_t ds18b21temp = 0;
 uint16_t gas1 = 0;
 uint16_t gas2 = 0;
 uint16_t gas3 = 0;
@@ -337,7 +337,7 @@ void onEvent(ev_t ev) {
             os_setTimedCallback(&sendjob, os_getTime() + ms2osticksRound(100), do_send);
         }
     }
-    if (ev == EV_JOINED) {
+    else if (ev == EV_JOINED) {
         if (SERIAL_DEBUG) Serial.println(F("EV_JOINED"));
         u4_t netid = 0;
         devaddr_t devaddr = 0;
@@ -354,7 +354,7 @@ void onEvent(ev_t ev) {
         LMIC_setDrTxpow(12 - nodeConfig.conf.loraSf, 14);
         LMIC_setAdrMode(nodeConfig.conf.use_adr);
     }
-    if (ev == EV_JOIN_TXCOMPLETE) {
+    else if (ev == EV_JOIN_TXCOMPLETE) {
         if (SERIAL_DEBUG) Serial.println(F("EV_JOIN_TXCOMPLETE: no JoinAccept"));
 
     } else {

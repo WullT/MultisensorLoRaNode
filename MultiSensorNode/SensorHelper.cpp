@@ -169,11 +169,11 @@ uint16_t measureAnalogLevel(uint8_t analogPin) {
     return (uint16_t)analogRead(analogPin);
 }
 
-uint16_t getSHTTemp() {
+int16_t getSHTTemp() {
     float t = sht31.readTemperature();
 
     if (SERIAL_DEBUG) Serial.printf("SHT31 Temperature = %.2f\n", t);
-    return (uint16_t)(t * 100);
+    return (int16_t)(t * 100);
 }
 uint16_t getSHTHumi() {
     float h = sht31.readHumidity();
@@ -182,7 +182,7 @@ uint16_t getSHTHumi() {
     return (uint16_t)(h * 100);
 }
 
-uint16_t getDs18b21Temp() {
+int16_t getDs18b21Temp() {
     ds18b20.requestTemperatures();
 
     float tempC = ds18b20.getTempCByIndex(0);
@@ -190,7 +190,7 @@ uint16_t getDs18b21Temp() {
         if (SERIAL_DEBUG) Serial.printf("DS18B20 ISNAN: %.2f\n", tempC);
     }
     if (SERIAL_DEBUG) Serial.printf("DS18B20 Temperature = %.2f\n", tempC);
-    return (uint16_t)(tempC * 100);
+    return (int16_t)(tempC * 100);
 }
 
 int getUVIndex(uint8_t analogPin) {

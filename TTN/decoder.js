@@ -6,6 +6,10 @@ function bytes2float(hb, lb) {
     return ((hb << 8) + lb) / 100;
 }
 
+function signedBytes2float(hb, lb) {
+    return (((hb & 0x80 ? hb - 0x100 : hb) << 8) + lb) / 100;
+}
+
 function byte2mv(batterybyte) {
     return (batterybyte * 2) * 10;
 }
@@ -35,7 +39,7 @@ function Decoder(bytes, port) {
         while (i < bytes.length) {
             switch (bytes[i]) {
                 case sensors.airth:
-                    decoded.airtemperature = bytes2float(bytes[i + 1], bytes[i + 2]);
+                    decoded.airtemperature = signedBytes2float(bytes[i + 1], bytes[i + 2]);
                     decoded.airhumidity = bytes2float(bytes[i + 3], bytes[i + 4]);
                     i += 5
                     break;
@@ -44,7 +48,7 @@ function Decoder(bytes, port) {
                     i += 3
                     break;
                 case sensors.soilt:
-                    decoded.soiltemperature = bytes2float(bytes[i + 1], bytes[i + 2]);
+                    decoded.soiltemperature = signedBytes2float(bytes[i + 1], bytes[i + 2]);
                     i += 3
                     break;
                 case sensors.uv:
